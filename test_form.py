@@ -1,9 +1,5 @@
 import os
 
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.chrome.service import Service
-
 import pytest
 from selene import browser, have, by
 
@@ -15,7 +11,6 @@ def browser_management():
 
 
 def test_complete_form():
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
     browser.open('/automation-practice-form')
 
     browser.element('#firstName').type('Papa').click()
@@ -63,4 +58,3 @@ def test_complete_form():
         'Address Ekb, Russia',
         'State and City NCR Delhi'))
 
-    driver.quit()
