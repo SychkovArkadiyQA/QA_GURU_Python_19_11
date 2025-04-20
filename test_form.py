@@ -2,20 +2,25 @@ import os
 
 import pytest
 from selene import browser, have, by
-
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
-capabilities = {
+options = Options()
+selenoid_capabilities = {
     "browserName": "chrome",
-    "browserVersion": "128.0",
+    "browserVersion": "100.0",
     "selenoid:options": {
+        "enableVNC": True,
         "enableVideo": False
     }
 }
 
+options.capabilities.update(selenoid_capabilities)
 driver = webdriver.Remote(
-    command_executor="https://selenoid.autotests.cloud/wd/hub",
-    desired_capabilities=capabilities)
+    command_executor=f"https://user1:1234@selenoid.autotests.cloud/wd/hub",
+    options=options)
+
+browser.config.driver = driver
 
 @pytest.fixture(scope='function', autouse=True)
 def browser_management():
