@@ -1,5 +1,5 @@
 import pytest
-from selene import browser, have, by
+from selene import browser, have, by, Config, Browser
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from utils import attach
@@ -10,6 +10,7 @@ def browser_management():
     browser.config.window_height = 1200
     browser.config.base_url = 'https://demoqa.com'
 
+@pytest.fixture(scope='function')
 def setup_browser(request):
     options = Options()
     selenoid_capabilities = {
@@ -17,18 +18,23 @@ def setup_browser(request):
         "browserVersion": "128.0",
         "selenoid:options": {
             "enableVNC": True,
-            "enableVideo": False}
-}
+            "enableVideo": False
+        }
+    }
     options.capabilities.update(selenoid_capabilities)
     driver = webdriver.Remote(
         command_executor=f"https://user1:1234@selenoid.autotests.cloud/wd/hub",
-        options=options)
+        options=options
+    )
 
     browser.config.driver = driver
+    yield browser
 
     attach.add_screenshot(browser)
     attach.add_logs(browser)
     attach.add_html(browser)
+
+    browser.quit()
 
 
 
