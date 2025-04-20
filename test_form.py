@@ -1,7 +1,6 @@
 import os
 from selene import browser, have, by
 
-
 def test_complete_form():
     browser.open('/automation-practice-form')
 
