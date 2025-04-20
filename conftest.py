@@ -26,9 +26,9 @@ def setup_browser(request):
 
     browser.config.driver = driver
 
-attach.add_screenshot(browser)
-attach.add_logs(browser)
-attach.add_html(browser)
+    attach.add_screenshot(browser)
+    attach.add_logs(browser)
+    attach.add_html(browser)
 
 
 
