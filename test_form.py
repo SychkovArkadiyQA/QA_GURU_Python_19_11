@@ -3,6 +3,20 @@ import os
 import pytest
 from selene import browser, have, by
 
+from selenium import webdriver
+
+capabilities = {
+    "browserName": "chrome",
+    "browserVersion": "128.0",
+    "selenoid:options": {
+        "enableVideo": False
+    }
+}
+
+driver = webdriver.Remote(
+    command_executor="https://selenoid.autotests.cloud/wd/hub",
+    desired_capabilities=capabilities)
+
 @pytest.fixture(scope='function', autouse=True)
 def browser_management():
     browser.config.window_width = 1400
