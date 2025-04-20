@@ -7,7 +7,7 @@ __pycache__/
 *.so
 .venv
 .env
-
+allure-results
 # Distribution / packaging
 .Python
 build/
