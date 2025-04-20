@@ -20,7 +20,7 @@ selenoid_login = os.getenv("SELENOID_LOGIN")
 selenoid_pass = os.getenv("SELENOID_PASS")
 selenoid_url = os.getenv("SELENOID_URL")
 
-@pytest.fixture(scope='function')
+@pytest.fixture(scope='function', autouse=True)
 def setup_browser(request):
     options = Options()
     selenoid_capabilities = {
