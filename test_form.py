@@ -8,13 +8,11 @@ from selenium.webdriver.chrome.options import Options
 options = Options()
 selenoid_capabilities = {
     "browserName": "chrome",
-    "browserVersion": "100.0",
+    "browserVersion": "128.0",
     "selenoid:options": {
         "enableVNC": True,
-        "enableVideo": False
-    }
+        "enableVideo": False}
 }
-
 options.capabilities.update(selenoid_capabilities)
 driver = webdriver.Remote(
     command_executor=f"https://user1:1234@selenoid.autotests.cloud/wd/hub",
