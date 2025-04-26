@@ -10,6 +10,13 @@ from utils import attach
 def load_env():
     load_dotenv()
 
+def pytest_addoption(parser):
+    parser.addoption(
+        '--browser_version',
+        default='128.0'
+    )
+
+
 @pytest.fixture(scope='function', autouse=True)
 def setup_browser(request):
     browser.config.window_width = 1920
